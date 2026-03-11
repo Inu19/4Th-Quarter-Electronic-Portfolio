@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ARC 3 - 4TH QUARTER | SAVITAR'S DOMAIN</title>
+<style>
+body, html {
+background: #000080;
+height: 100%;
+margin: 0;
+font-family: 'Arial', sans-serif;
+color: #B8D4E8;
+overflow-x: hidden;
+}
+
+.loading-screen {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: #003366;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+}
+
+.savitar-symbol {
+font-size: 120px;
+color: #87CEEB;
+animation: pulse 1.5s infinite;
+text-shadow: 0 0 30px #87CEEB, 0 0 60px #4169E1, 0 0 90px #1E90FF, 0 0 120px #00BFFF;
+filter: drop-shadow(0 0 20px #87CEEB) drop-shadow(0 0 40px #4169E1);
+}
+
+@keyframes pulse {
+0%, 100% { transform: scale(1); opacity: 1; }
+50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes pulseBackground {
+0%, 100% { opacity: 0.8; }
+50% { opacity: 1; }
+}
+
+@keyframes sparkle {
+0%, 100% { opacity: 0; transform: scale(0); }
+50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes loadingBar {
+0% { transform: translateX(-100%); }
+100% { transform: translateX(100%); }
+}
+
+@keyframes fadeInOut {
+0%, 100% { opacity: 0.6; }
+50% { opacity: 1; }
+}
+
+@keyframes textGlow {
+0%, 100% { 
+text-shadow: 0 0 20px rgba(135, 206, 235, 0.8), 0 0 40px rgba(30, 144, 255, 0.6), 0 0 60px rgba(65, 105, 225, 0.4);
+}
+50% { 
+text-shadow: 0 0 30px rgba(135, 206, 235, 1), 0 0 60px rgba(30, 144, 255, 0.8), 0 0 90px rgba(65, 105, 225, 0.6), 0 0 120px rgba(0, 191, 255, 0.4);
+}
+}
+
+.loading-text {
+font-size: 32px;
+color: #87CEEB;
+margin-top: 30px;
+text-shadow: 0 0 20px rgba(135, 206, 235, 0.8), 0 0 40px rgba(30, 144, 255, 0.6), 0 0 60px rgba(65, 105, 225, 0.4);
+animation: textGlow 2s ease-in-out infinite;
+font-family: 'Impact', sans-serif;
+letter-spacing: 2px;
+}
+
+#mainContent {
+display: none;
+opacity: 0;
+transition: opacity 0.5s;
+padding: 20px;
+}
+
+#mainContent.show {
+opacity: 1;
+}
+
+.header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+h1 {
+color: #87CEEB;
+font-size: 48px;
+text-shadow: 0 0 20px rgba(135, 206, 235, 0.6);
+margin: 20px 0;
+}
+
+.quarter-tabs {
+display: flex;
+justify-content: center;
+gap: 20px;
+margin: 30px 0;
+flex-wrap: wrap;
+}
+
+.quarter-tab {
+background: #1E90FF;
+color: #FFFFFF;
+border: none;
+padding: 15px 40px;
+font-size: 20px;
+border-radius: 10px;
+cursor: pointer;
+transition: all 0.3s;
+position: relative;
+overflow: hidden;
+}
+
+.quarter-tab:hover {
+transform: scale(1.05) translateY(-3px);
+box-shadow: 0 8px 25px rgba(30, 144, 255, 0.4);
+background: #4169E1;
+}
+
+.quarter-tab.active {
+background: #4169E1;
+color: #FFFFFF;
+box-shadow: 0 8px 25px rgba(65, 105, 225, 0.6);
+}
+
+.quarter-content {
+display: none;
+background: rgba(0, 0, 0, 0.85);
+padding: 40px;
+border-radius: 15px;
+border: 2px solid #1E90FF;
+animation: fadeIn 0.5s;
+}
+
+.quarter-content.active {
+display: block;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+from { 
+transform: scale(0.8);
+opacity: 0;
+}
+to { 
+transform: scale(1);
+opacity: 1;
+}
+}
+
+@keyframes textGlow {
+0%, 100% { 
+text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+}
+50% { 
+text-shadow: 0 0 30px currentColor, 0 0 60px currentColor, 0 0 80px currentColor;
+}
+}
+
+.lesson-nav {
+display: flex;
+justify-content: center;
+gap: 15px;
+margin: 30px 0;
+flex-wrap: wrap;
+}
+
+.lesson-btn {
+background: #00BFFF;
+color: #FFFFFF;
+border: 2px solid #87CEEB;
+padding: 12px 25px;
+font-size: 16px;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.lesson-btn:hover {
+background: #4169E1;
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(65, 105, 225, 0.4);
+}
+
+.lesson-btn.active {
+background: #4169E1;
+color: #FFFFFF;
+border-color: #87CEEB;
+}
+
+.lesson-content {
+display: none;
+}
+
+.lesson-content.active {
+display: block;
+}
+
+.event-content {
+display: none;
+}
+
+.event-content.active {
+display: block;
+}
+
+.demo-box {
+background: rgba(0, 0, 0, 0.7);
+padding: 25px;
+border-radius: 10px;
+margin: 20px 0;
+border: 2px solid #1E90FF;
+}
+
+.demo-btn {
+background: #1E90FF;
+color: #FFFFFF;
+border: none;
+padding: 12px 25px;
+font-size: 16px;
+border-radius: 5px;
+cursor: pointer;
+transition: all 0.3s;
+margin: 5px;
+}
+
+.demo-btn:hover {
+background: #4169E1;
+transform: scale(1.05);
+}
+
+.code-block {
+background: rgba(0, 0, 0, 0.6);
+padding: 15px;
+border-radius: 5px;
+margin: 15px 0;
+border-left: 4px solid #87CEEB;
+overflow-x: auto;
+}
+
+code {
+color: #87CEEB;
+font-family: 'Courier New', monospace;
+font-size: 14px;
+}
+
+.arc-header {
+text-align: center;
+background: #003366;
+padding: 20px;
+box-shadow: 0 4px 20px rgba(30, 144, 255, 0.4), 0 2px 10px rgba(135, 206, 235, 0.3);
+position: sticky;
+top: 0;
+z-index: 1000;
+border-bottom: 3px solid #1E90FF;
+border-top: 2px solid rgba(135, 206, 235, 0.5);
+}
+
+.arc-header h2 {
+color: #87CEEB;
+font-family: 'Impact', sans-serif;
+margin: 0 0 15px 0;
+text-shadow: 0 0 15px #87CEEB, 0 0 25px #4169E1, 2px 2px 4px rgba(0, 0, 0, 0.9);
+font-size: 32px;
+}
+
+.arc-selector {
+display: flex;
+justify-content: center;
+gap: 20px;
+flex-wrap: wrap;
+}
+
+.arc-btn button {
+font-family: 'Impact', sans-serif;
+font-size: 20px;
+padding: 12px 25px;
+border-radius: 10px;
+cursor: pointer;
+transition: all 0.3s ease;
+border: 3px solid;
+}
+
+.arc1-btn {
+background: #FFD700;
+color: #8B4513;
+border-color: #FF8C00;
+box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+transition: all 0.3s ease;
+}
+
+.arc1-btn:hover {
+transform: scale(1.08);
+box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+}
+
+.arc2-btn {
+background: #FFFF00;
+color: #000;
+border-color: #00FFFF;
+box-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+transition: all 0.3s ease;
+}
+
+.arc2-btn:hover {
+transform: scale(1.08);
+box-shadow: 0 0 25px rgba(255, 255, 0, 0.8);
+}
+
+.arc3-btn-active {
+background: #1E90FF;
+color: #FFFFFF;
+border-color: #87CEEB;
+box-shadow: 0 0 20px rgba(30, 144, 255, 0.8), 0 0 30px rgba(135, 206, 235, 0.5);
+text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(30, 144, 255, 0.1) 0%, rgba(0, 0, 0, 0.9) 70%); animation: pulseBackground 3s ease-in-out infinite;"></div>
+<div style="position: absolute; top: 20%; left: 10%; width: 4px; height: 4px; background: #87CEEB; border-radius: 50%; animation: sparkle 2s infinite; box-shadow: 0 0 10px #87CEEB;"></div>
+<div style="position: absolute; top: 30%; right: 15%; width: 3px; height: 3px; background: #4169E1; border-radius: 50%; animation: sparkle 2.5s infinite; box-shadow: 0 0 8px #4169E1;"></div>
+<div style="position: absolute; bottom: 25%; left: 20%; width: 5px; height: 5px; background: #1E90FF; border-radius: 50%; animation: sparkle 1.8s infinite; box-shadow: 0 0 12px #1E90FF;"></div>
+<div style="position: absolute; top: 60%; right: 25%; width: 2px; height: 2px; background: #00BFFF; border-radius: 50%; animation: sparkle 3s infinite; box-shadow: 0 0 6px #00BFFF;"></div>
+<div style="position: absolute; bottom: 40%; right: 10%; width: 4px; height: 4px; background: #87CEFA; border-radius: 50%; animation: sparkle 2.2s infinite; box-shadow: 0 0 10px #87CEFA;"></div>
+<div style="position: absolute; top: 15%; left: 30%; width: 3px; height: 3px; background: #4169E1; border-radius: 50%; animation: sparkle 2.8s infinite; box-shadow: 0 0 8px #4169E1;"></div>
+
+<div class="savitar-symbol" style="position: relative; z-index: 10;">⚡</div>
+<div class="loading-text" style="position: relative; z-index: 10; background: rgba(0, 0, 0, 0.3); padding: 15px 30px; border-radius: 20px; border: 2px solid rgba(135, 206, 235, 0.5); backdrop-filter: blur(10px);">
+LOADING SAVITAR'S DOMAIN...
+</div>
+
+<div style="position: relative; z-index: 10; margin-top: 30px; width: 300px; height: 6px; background: rgba(0, 0, 0, 0.7); border-radius: 10px; overflow: hidden; border: 2px solid #1E90FF; box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);">
+<div style="width: 100%; height: 100%; background: linear-gradient(90deg, #1E90FF, #4169E1, #87CEEB, #00BFFF); animation: loadingBar 2s ease-in-out infinite; box-shadow: 0 0 15px rgba(30, 144, 255, 0.8);"></div>
+</div>
+
+<div style="position: relative; z-index: 10; margin-top: 20px; color: #87CEEB; font-size: 14px; text-shadow: 0 0 10px #87CEEB; animation: fadeInOut 2s ease-in-out infinite;">
+"I am the God of Speed"
+</div>
+</div>
+
+<!-- Main Content -->
+<div id="mainContent">
+<div class="arc-header">
+<h2>⚡ SELECT YOUR ARC ⚡</h2>
+<div class="arc-selector">
+<a href="#" class="arc-btn" style="text-decoration: none;" onclick="return navigateToArc1();">
+<button class="arc1-btn">📖 ARC 1: 2ND QUARTER</button>
+</a>
+<a href="#" class="arc-btn" style="text-decoration: none;" onclick="return navigateToArc2();">
+<button class="arc2-btn">📚 ARC 2: 3RD QUARTER</button>
+</a>
+<a href="arc3.html" class="arc-btn" style="text-decoration: none;">
+<button class="arc3-btn-active">🎓 ARC 3: 4TH QUARTER</button>
+</a>
+</div>
+</div>
+
+<div class="header">
+<!-- Savitar Image and Quotes -->
+<div style="text-align: center; margin: 30px 0;">
+<img src="https://i.imgur.com/0Pnger0.jpeg" alt="Savitar - God of Speed" style="max-width: 400px; width: 100%; border-radius: 15px; border: 3px solid #1E90FF; box-shadow: 0 0 30px rgba(30, 144, 255, 0.5);">
+<div style="margin-top: 25px; padding: 20px; background: rgba(30, 144, 255, 0.1); border-radius: 10px; border: 2px solid #4169E1;">
+<p style="color: #87CEEB; font-size: 24px; font-style: italic; margin: 10px 0;">"I AM THE FUTURE, FLASH!"</p>
+<p style="color: #87CEEB; font-size: 20px; font-style: italic; margin: 10px 0;">"I am the God of Speed"</p>
+<p style="color: #B8D4E8; font-size: 16px; margin: 15px 0; line-height: 1.6;">
+Just as Savitar represents the future and ultimate speed, this electronic portfolio showcases my journey through the 4th quarter - a collection of knowledge, growth, and achievements that propel me forward into my academic future.
+</p>
+</div>
+</div>
+<h1>⚡ ARC 3: 4TH QUARTER - THE FUTURE ⚡</h1>
+</div>
+
+<!-- Quarter Subject Tabs -->
+<div class="quarter-tabs">
+<button class="quarter-tab active" onclick="showQuarter('ict-tle')">💻 ICT/TLE</button>
+<button class="quarter-tab" onclick="showQuarter('araling-panlipunan')">🌏 Araling Panlipunan</button>
+</div>
+
+<!-- ICT/TLE Content -->
+<div id="ict-tle" class="quarter-content active">
+<h2 style="color: #5B9BD5; font-size: 40px; margin-bottom: 30px; text-align: center;">💻 ICT/TLE - JavaScript Programming</h2>
+
+<!-- ICT Lesson Navigation -->
+<div class="lesson-nav">
+<button class="lesson-btn active" onclick="showICTLesson('lesson1')">🚀 Lesson 1: JavaScript Intro</button>
+<button class="lesson-btn" onclick="showICTLesson('lesson2')">📝 Lesson 2: Script Placement</button>
+<button class="lesson-btn" onclick="showICTLesson('lesson3')">🔧 Lesson 3: Objects & Methods</button>
+<button class="lesson-btn" onclick="showICTLesson('lesson4')">⚡ Lesson 4: Events & Variables</button>
+<button class="lesson-btn" onclick="showICTLesson('events')">🎉 Events</button>
+</div>
+
+<!-- Lesson 1: JavaScript Introduction -->
+<div id="ict-lesson1" class="lesson-content active">
+<h2 style="color: #5B9BD5; font-size: 36px; margin-bottom: 25px;">⚡ Lesson 1: Introduction to JavaScript</h2>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">📋 Purpose of JavaScript</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6;">
+To create dynamic, interactive user experiences, handling everything from UI rendering (like React for Facebook) and content loading to real-time updates, personalized feeds, video controls (captions, volume), and tracking user activity (Meta Pixel).
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">🎯 Static vs Dynamic Websites</h3>
+<div style="display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
+<button class="demo-btn" onclick="showExample('static')">Static Example</button>
+<button class="demo-btn" onclick="showExample('dynamic')">Dynamic Example</button>
+</div>
+<div id="exampleOutput" style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 8px; margin: 15px 0; min-height: 100px; border: 2px dashed #5B9BD5;">
+<p style="color: #7FB3D5; text-align: center; margin: 0;">Click a button above to see examples!</p>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">📚 About JavaScript</h3>
+<ul style="color: #B8D4E8; font-size: 18px; line-height: 2; padding-left: 40px;">
+<li>The MOST popular & widely used scripting language on the internet</li>
+<li>Recognized & works in all major browsers</li>
+<li>Developed by Brendan Eich of Netscape under the name Mocha, later renamed to LiveScript</li>
+<li>Opened to Internet Explorer in 1996</li>
+<li>A trademark of the Oracle Corporation</li>
+<li>Client-side, high-level scripting, interpreted & object-oriented</li>
+</ul>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">🔧 JavaScript Features</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(0, 150, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #5B9BD5; margin: 0 0 10px 0;">🌐 Client-side Processing</h4>
+<p style="color: #B8D4E8; margin: 0;">Codes are processed on the user's computer</p>
+</div>
+<div style="background: rgba(100, 200, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #7FB3D5; margin: 0 0 10px 0;">📝 High-level Scripting</h4>
+<p style="color: #B8D4E8; margin: 0;">Written in words close to English</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #8FAADC; margin: 0 0 10px 0;">⚡ Interpreted Language</h4>
+<p style="color: #B8D4E8; margin: 0;">Source code converted to machine code</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #8FAADC; margin: 0 0 10px 0;">🎯 Case-sensitive</h4>
+<p style="color: #B8D4E8; margin: 0;">myVariable ≠ MyVariable</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">🎮 Interactive Demo: JavaScript Capabilities</h3>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+<button class="demo-btn" onclick="demonstrateEvents()">🖱️ React to Events</button>
+<button class="demo-btn" onclick="demonstrateCookies()">🍪 Create Cookies</button>
+<button class="demo-btn" onclick="demonstrateEnhancement()">✨ Enhance Webpage</button>
+</div>
+<div id="demoResult" style="margin-top: 20px; padding: 15px; background: rgba(0, 150, 255, 0.1); border-radius: 5px; min-height: 50px;">
+Ready for demonstration...
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">🌟 Real-World Examples</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+<div style="background: rgba(0, 150, 255, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🔍</div>
+<h4 style="color: #5B9BD5; margin: 0 0 10px 0;">Google Search</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Real-time updates and efficient query handling</p>
+</div>
+<div style="background: rgba(100, 200, 255, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🎵</div>
+<h4 style="color: #7FB3D5; margin: 0 0 10px 0;">YouTube</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Seamless streaming and dynamic content</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">📱</div>
+<h4 style="color: #8FAADC; margin: 0 0 10px 0;">Facebook</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Real-time updates and React framework</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Lesson 2: Script Placement -->
+<div id="ict-lesson2" class="lesson-content">
+<h2 style="color: #5B9BD5; font-size: 36px; margin-bottom: 25px;">📝 Lesson 2: Script Placement & Guidelines</h2>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">📍 Where to Place Scripts</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(0, 150, 255, 0.2); padding: 20px; border-radius: 8px;">
+<h4 style="color: #5B9BD5; margin: 0 0 15px 0;">📄 HEAD Section</h4>
+<p style="color: #B8D4E8; margin: 0 0 10px 0;">Scripts are pre-loaded before the page loads</p>
+<div class="code-block">
+<code>&lt;head&gt;<br>&nbsp;&nbsp;&lt;script&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;// Function definitions<br>&nbsp;&nbsp;&lt;/script&gt;<br>&lt;/head&gt;</code>
+</div>
+</div>
+<div style="background: rgba(100, 200, 255, 0.2); padding: 20px; border-radius: 8px;">
+<h4 style="color: #7FB3D5; margin: 0 0 15px 0;">📄 BODY Section</h4>
+<p style="color: #B8D4E8; margin: 0 0 10px 0;">Scripts execute when the page loads</p>
+<div class="code-block">
+<code>&lt;body&gt;<br>&nbsp;&nbsp;&lt;script&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;// Immediate execution<br>&nbsp;&nbsp;&lt;/script&gt;<br>&lt;/body&gt;</code>
+</div>
+</div>
+<div style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 8px;">
+<h4 style="color: #B8D4E8; margin: 0 0 15px 0;">📁 External File</h4>
+<p style="color: #B8D4E8; margin: 0 0 10px 0;">Reusable JavaScript files</p>
+<div class="code-block">
+<code>&lt;script src="script.js"&gt;&lt;/script&gt;</code>
+</div>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">🎮 Interactive Demo: Script Execution</h3>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+<button class="demo-btn" onclick="demonstrateHeadScript()">🔝 HEAD Script</button>
+<button class="demo-btn" onclick="demonstrateBodyScript()">📄 BODY Script</button>
+<button class="demo-btn" onclick="clearExecutionLog()">🗑️ Clear Log</button>
+</div>
+<div id="executionLog" style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 8px; margin: 15px 0; min-height: 100px; border: 2px solid #5B9BD5;">
+<p style="margin: 0; color: #5B9BD5;">📋 Execution Log:</p>
+<div id="logContent" style="margin-top: 10px; color: #B8D4E8;">Ready to demonstrate script execution order...</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">📝 JavaScript Guidelines</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(0, 150, 255, 0.2); padding: 20px; border-radius: 8px;">
+<h4 style="color: #5B9BD5; margin: 0 0 15px 0;">🔤 Case Sensitive</h4>
+<p style="color: #B8D4E8; margin: 0;">myHome ≠ MyHome</p>
+<div style="margin-top: 10px;">
+<button class="demo-btn" onclick="demonstrateCaseSensitive()">Test Case</button>
+</div>
+</div>
+<div style="background: rgba(100, 200, 255, 0.2); padding: 20px; border-radius: 8px;">
+<h4 style="color: #7FB3D5; margin: 0 0 15px 0;">⚪ White Space</h4>
+<p style="color: #B8D4E8; margin: 0;">JavaScript ignores white space within lines</p>
+<div style="margin-top: 10px;">
+<button class="demo-btn" onclick="demonstrateWhiteSpace()">Test Space</button>
+</div>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 20px; border-radius: 8px;">
+<h4 style="color: #8FAADC; margin: 0 0 15px 0;">↩️ Breaking Lines</h4>
+<p style="color: #B8D4E8; margin: 0;">Use backslash (\) to break code lines</p>
+<div style="margin-top: 10px;">
+<button class="demo-btn" onclick="demonstrateLineBreak()">Test Break</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Lesson 3: Objects & Methods -->
+<div id="ict-lesson3" class="lesson-content">
+<h2 style="color: #5B9BD5; font-size: 36px; margin-bottom: 25px;">🔧 Lesson 3: Objects, Methods & Syntax</h2>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">📦 JavaScript Objects</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+Objects are containers for named values called properties or methods. They represent real-world entities with characteristics and behaviors.
+</p>
+<div class="code-block">
+<code>var person = {<br>
+&nbsp;&nbsp;firstName: "Grace",<br>
+&nbsp;&nbsp;lastName: "Santos",<br>
+&nbsp;&nbsp;age: 16,<br>
+&nbsp;&nbsp;school: "MNHS"<br>
+};</code>
+</div>
+<button class="demo-btn" onclick="demonstrateObject()">View Object Example</button>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">⚙️ JavaScript Methods</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+Methods are actions that can be performed on objects. They are functions stored as object properties.
+</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+<div style="background: rgba(0, 150, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #5B9BD5; margin: 0 0 10px 0;">document.write()</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Writes content to the document</p>
+</div>
+<div style="background: rgba(100, 200, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #7FB3D5; margin: 0 0 10px 0;">console.log()</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Outputs to the console</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #8FAADC; margin: 0 0 10px 0;">alert()</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Displays an alert box</p>
+</div>
+</div>
+<button class="demo-btn" onclick="demonstrateMethod()">Test Method</button>
+<div id="methodDemo" style="margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; min-height: 50px;">
+Ready to test methods...
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">📝 JavaScript Syntax</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+Syntax is the set of rules that defines how JavaScript programs are constructed.
+</p>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Statements are separated by semicolons (;)</li>
+<li>Variables are declared with var, let, or const</li>
+<li>Strings are enclosed in quotes: "text" or 'text'</li>
+<li>Code blocks are enclosed in curly braces { }</li>
+<li>Comments: // single line or /* multi-line */</li>
+</ul>
+<button class="demo-btn" onclick="demonstrateSyntax()">View Syntax Rules</button>
+</div>
+</div>
+
+<!-- Lesson 4: Events & Variables -->
+<div id="ict-lesson4" class="lesson-content">
+<h2 style="color: #5B9BD5; font-size: 36px; margin-bottom: 25px;">⚡ Lesson 4: Events, Variables & Operations</h2>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">📊 JavaScript Variables</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+Variables are containers for storing data values. They can hold numbers, strings, objects, and more.
+</p>
+<div class="code-block">
+<code>var name = "Grace";&nbsp;&nbsp;// String<br>
+let age = 16;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Number<br>
+const PI = 3.14;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Constant</code>
+</div>
+<button class="demo-btn" onclick="demonstrateVariable()">View Variable Example</button>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">🎯 JavaScript Events</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+Events are actions that happen in the browser that JavaScript can respond to.
+</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+<div style="background: rgba(0, 150, 255, 0.2); padding: 15px; border-radius: 8px; text-align: center;">
+<p style="color: #5B9BD5; margin: 0; font-weight: bold;">onclick</p>
+<p style="color: #B8D4E8; margin: 5px 0; font-size: 14px;">Mouse click</p>
+</div>
+<div style="background: rgba(100, 200, 255, 0.2); padding: 15px; border-radius: 8px; text-align: center;">
+<p style="color: #7FB3D5; margin: 0; font-weight: bold;">onload</p>
+<p style="color: #B8D4E8; margin: 5px 0; font-size: 14px;">Page loads</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 15px; border-radius: 8px; text-align: center;">
+<p style="color: #8FAADC; margin: 0; font-weight: bold;">onmouseover</p>
+<p style="color: #B8D4E8; margin: 5px 0; font-size: 14px;">Mouse hover</p>
+</div>
+</div>
+<button class="demo-btn" onclick="demonstrateEvent()">Trigger Event</button>
+<div id="eventDemo" style="margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; min-height: 50px;">
+Click the button to trigger an event...
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">💬 Popup Boxes</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+JavaScript has three types of popup boxes for user interaction.
+</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+<button class="demo-btn" onclick="demonstratePopup('alert')">Alert Box</button>
+<button class="demo-btn" onclick="demonstratePopup('confirm')">Confirm Box</button>
+<button class="demo-btn" onclick="demonstratePopup('prompt')">Prompt Box</button>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">➕ Arithmetic Operators</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+Arithmetic operators perform mathematical operations on numbers.
+</p>
+<button class="demo-btn" onclick="demonstrateArithmetic()">Calculate</button>
+<div id="arithmeticDemo" style="margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; min-height: 50px;">
+Click Calculate to see arithmetic operations...
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">⚖️ Comparison Operators</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+Comparison operators compare two values and return true or false.
+</p>
+<button class="demo-btn" onclick="demonstrateComparison()">Compare</button>
+<div id="comparisonDemo" style="margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; min-height: 50px;">
+Click Compare to see comparison results...
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #7FB3D5; font-size: 28px; margin-bottom: 20px;">🔀 Conditional Statements</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6; margin-bottom: 15px;">
+Conditional statements execute different code based on conditions.
+</p>
+<div class="code-block">
+<code>if (condition) {<br>
+&nbsp;&nbsp;// code if true<br>
+} else {<br>
+&nbsp;&nbsp;// code if false<br>
+}</code>
+</div>
+<button class="demo-btn" onclick="demonstrateConditional()">Test Condition</button>
+<div id="conditionalDemo" style="margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; min-height: 50px;">
+Click Test Condition to try an if-else statement...
+</div>
+</div>
+</div>
+
+<!-- Events Section -->
+<div id="ict-events" class="lesson-content">
+<h2 style="color: #5B9BD5; font-size: 36px; margin-bottom: 25px; text-align: center;">🎉 4TH QUARTER EVENTS</h2>
+
+<div class="lesson-nav">
+<button class="event-btn lesson-btn active" onclick="showEvent('botb')">🎸 BOTB</button>
+<button class="event-btn lesson-btn" onclick="showEvent('folkdance')">💃 Folk Dance</button>
+<button class="event-btn lesson-btn" onclick="showEvent('meeting')">🗳️ Meeting De Avance</button>
+<button class="event-btn lesson-btn" onclick="showEvent('streetdance')">🕺 Street Dance</button>
+<button class="event-btn lesson-btn" onclick="showEvent('noli')">📚 Noli Me Tangere</button>
+</div>
+
+<!-- BOTB Event -->
+<div id="event-botb" class="event-content lesson-content active">
+<h3 style="color: #5B9BD5; font-size: 32px; margin-bottom: 20px; text-align: center;">🎸 Battle Of The Bands (BOTB)</h3>
+<div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+<img src="botb.jpg" alt="BOTB Event 1" style="max-width: 400px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF;">
+<img src="botb2.jpg" alt="BOTB Event 2" style="max-width: 400px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF;">
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">1. What is the most important thing I learned from the event?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+As the lead guitarist for the band "Umasaginip," the most important thing I learned from BOTB is that music is a powerful medium for self-expression and connection. Performing on stage taught me about teamwork, as every band member must work in harmony to create a cohesive sound. I also learned about stage presence, confidence, and how to channel nerves into positive energy. The experience showed me that music transcends individual talent—it's about creating something beautiful together.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">2. How can I apply what I learned in real-life situations?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+I can apply the teamwork skills I learned from performing with "Umasaginip" to group projects and collaborative work in school and future careers. The confidence I gained from performing on stage helps me in public speaking and presentations. The discipline required for practice and preparation translates to better study habits and time management. Most importantly, I can use music as a stress reliever and creative outlet throughout my life.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">3. Did I actively participate in the event? How?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Yes, I actively participated as the lead guitarist for the band "Umasaginip." I contributed by practicing regularly with my bandmates, learning our songs thoroughly, and performing guitar solos and rhythm parts during our performance. I helped with song arrangements and worked closely with the other band members to ensure our sound was tight and cohesive. Being on stage and performing for the audience was an incredible experience that required dedication and preparation.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">4. If I were to teach this topic/subject to a classmate, how would I explain it?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+I would explain BOTB as more than just a music competition—it's a celebration of creativity, teamwork, and artistic expression. I'd emphasize that success isn't just about individual talent but about how well band members work together, support each other, and create something greater than the sum of their parts. I'd share that the real value comes from the preparation, practice, and bonds formed with bandmates, not just winning or losing.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">5. Why is it important to have an event (per subject)? Explain your answer.</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Events like BOTB are important because they provide students with opportunities to showcase talents that might not be recognized in traditional academic settings. They encourage creativity, build confidence, and create a sense of community among students with shared interests. These events also teach valuable life skills like teamwork, time management, and handling pressure. They make school more engaging and help students discover and develop their passions beyond textbooks.
+</p>
+</div>
+</div>
+
+<!-- Folk Dance Event -->
+<div id="event-folkdance" class="event-content lesson-content">
+<h3 style="color: #5B9BD5; font-size: 32px; margin-bottom: 20px; text-align: center;">💃 Folk Dance</h3>
+<div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+<img src="folkdance.jpg" alt="Folk Dance Event 1" style="max-width: 400px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF;">
+<img src="folkdance2.jpg" alt="Folk Dance Event 2" style="max-width: 400px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF;">
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">1. How does folk dance preserve Filipino culture?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Watching my fellow batchmates perform folk dances showed me how these performances serve as a living repository of Filipino heritage, passing down traditions, stories, and values from generation to generation. Each dance reflects the history, customs, and way of life of different regions in the Philippines. By observing these performances, I gained appreciation for how folk dance keeps our cultural identity alive and ensures that future generations understand and appreciate their roots.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">2. What role does teamwork play in folk dance performances?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Observing my batchmates perform, I could see how teamwork is essential in folk dance as performers must move in synchronization, maintain proper spacing, and coordinate timing perfectly. Each dancer relied on others to create the complete visual and artistic effect. From the audience, I witnessed how success requires trust, communication, and mutual support among team members. Their collective effort demonstrated the importance of unity over individual performance.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">3. What emotions are conveyed through traditional dances?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Watching my fellow batchmates perform traditional Filipino dances, I observed a spectrum of emotions being conveyed - joy and celebration in festive dances like Tinikling, grace and elegance in courtship dances like Pandanggo sa Ilaw, and pride in cultural identity throughout all performances. Some dances expressed playfulness and humor, while others demonstrated strength and resilience. The emotions reflected the Filipino spirit - warm, welcoming, and full of life.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">4. How can we encourage the preservation of folk dances?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+We can preserve folk dances by incorporating them into school curricula, organizing regular performances and competitions, and documenting them through video and written records. Encouraging youth participation through engaging presentations and making folk dance accessible and fun is crucial. Supporting cultural organizations, attending folk dance events, and sharing knowledge with younger generations helps maintain interest. Using social media and modern platforms to showcase traditional dances can also attract new audiences and participants.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">5. What did you learn about the diversity of Filipino cultural arts?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+I learned that the Philippines has incredibly rich and diverse cultural arts, with each region contributing unique dances, music, and traditions. This diversity reflects our archipelagic geography and varied historical influences. Despite differences, common themes of community, celebration, and resilience unite Filipino cultural expressions. The folk dance event demonstrated that our cultural heritage is not monolithic but a beautiful tapestry of different traditions that together form our national identity. It made me proud of our cultural wealth and motivated to learn more about different regional traditions.
+</p>
+</div>
+</div>
+
+<!-- Meeting De Avance Event -->
+<div id="event-meeting" class="event-content lesson-content">
+<h3 style="color: #5B9BD5; font-size: 32px; margin-bottom: 20px; text-align: center;">🗳️ Meeting De Avance</h3>
+<div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+<img src="mda.jpg" alt="Meeting De Avance 1" style="max-width: 400px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF;">
+<img src="mda2.jpg" alt="Meeting De Avance 2" style="max-width: 400px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF;">
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">1. How does Meeting De Avance reflect democratic processes?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+I think I was absent during Meeting De Avance, so I don't really remember what happened during the event. However, from what I understand about such events, Meeting De Avance typically mirrors democratic processes by giving candidates a platform to present their platforms and allowing voters to make informed decisions. It embodies principles of free speech, equal opportunity, and transparent campaigning, serving as a learning experience about civic participation.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">2. What qualities should student leaders possess?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Even though I wasn't present during the event, I believe student leaders should possess integrity, responsibility, and genuine concern for their fellow students. They need strong communication skills to articulate ideas and listen to concerns. Leadership requires vision to identify problems and propose solutions, as well as dedication to follow through on commitments. Good student leaders should be approachable, fair, and willing to serve rather than seeking personal glory.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">3. How do candidates address student issues and concerns?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Since I was absent during Meeting De Avance, I can't speak from direct experience about how the candidates addressed student issues. However, I understand that effective candidates typically listen to and identify common concerns, present specific actionable plans rather than vague promises, and acknowledge real problems students face while proposing realistic solutions. They should demonstrate understanding of constraints while showing determination to advocate for student welfare.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">4. What role does student government play in school?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Student government serves as the bridge between students and school administration, representing student voices in decision-making processes. It organizes events, manages student activities, and addresses concerns that affect the student body. Student government provides leadership opportunities, teaches governance and responsibility, and helps create a positive school environment. It empowers students to take ownership of their school experience and demonstrates that their opinions matter. Through student government, students learn practical skills in organization, negotiation, and public service.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">5. How does this event promote civic awareness among students?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Meeting De Avance promotes civic awareness by introducing students to electoral processes in a relatable context. It teaches the importance of informed voting, critical evaluation of candidates, and active participation in governance. Students learn that their choices have consequences and that democracy requires engagement, not just passive observation. The event demonstrates how campaigns work, the power of public speaking, and the responsibility of both leaders and citizens. It cultivates political literacy and prepares students to be active, informed citizens in broader society.
+</p>
+</div>
+</div>
+
+<!-- Street Dance Event -->
+<div id="event-streetdance" class="event-content lesson-content">
+<h3 style="color: #5B9BD5; font-size: 32px; margin-bottom: 20px; text-align: center;">🕺 Street Dance</h3>
+<div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+<img src="streetdance.jpg" alt="Street Dance Event 1" style="max-width: 400px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF;">
+<img src="streetdance2.jpg" alt="Street Dance Event 2" style="max-width: 400px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF;">
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">1. What is the most important thing I learned from the event?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Watching my fellow batchmates compete with other grade levels, I learned that street dance is a powerful form of self-expression that combines athleticism, creativity, and cultural identity. The event showed me how dance can break barriers and bring people together regardless of their background. I observed how each performance told a unique story through movement, demonstrating that art can be a universal language that transcends words.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">2. How can I apply what I learned in real-life situations?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+I can apply the lessons of creativity, self-expression, and perseverance that I witnessed in street dance to my own pursuits, whether in academics, music, or personal projects. The dedication and practice I observed in the dancers inspire me to approach my own goals with the same commitment. I can also use the confidence and stage presence I saw to improve my own performance skills, especially when playing guitar with my band.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">3. Did I actively participate in the event? How?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+I didn't participate as a dancer, but I actively supported the event by watching and cheering for my fellow batchmates as they competed with other grade levels. Being part of the audience allowed me to appreciate the skill, creativity, and hard work that went into each performance. I contributed by providing moral support and celebrating the achievements of all the participants, regardless of which grade level they represented.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">4. If I were to teach this topic/subject to a classmate, how would I explain it?</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+I would explain street dance as more than just movement—it's a form of storytelling that combines physical skill, artistic expression, and cultural identity. I'd emphasize that street dance is about authenticity, creativity, and the courage to express yourself freely. I would share how the competition showed that dance is not just about winning, but about pushing boundaries, supporting each other, and celebrating the diversity of human expression.
+</p>
+</div>
+<div class="demo-box">
+<h4 style="color: #7FB3D5; font-size: 24px; margin-bottom: 15px;">5. Why is it important to have an event (per subject)? Explain your answer.</h4>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.8;">
+Events like street dance competitions are important because they provide students with platforms to showcase talents that might not be recognized in traditional academic settings. They promote physical fitness, creativity, and self-confidence while building school spirit and community. These events also teach valuable life skills like teamwork, perseverance, and handling pressure. They create inclusive environments where students can appreciate different forms of art and expression, fostering mutual respect and understanding among diverse groups.
+</p>
+</div>
+</div>
+
+<!-- Noli Me Tangere Special Event -->
+<div id="event-noli" class="event-content lesson-content">
+<h3 style="color: #5B9BD5; font-size: 32px; margin-bottom: 20px; text-align: center;">📚 Noli Me Tangere</h3>
+
+<div class="demo-box" style="background: linear-gradient(135deg, rgba(30, 144, 255, 0.1), rgba(135, 206, 235, 0.1)); border: 3px solid #1E90FF; box-shadow: 0 0 30px rgba(30, 144, 255, 0.4), inset 0 0 20px rgba(135, 206, 235, 0.1);">
+<div style="text-align: center; padding: 40px 20px;">
+<div style="font-size: 80px; margin-bottom: 20px; animation: pulse 2s infinite; filter: drop-shadow(0 0 20px #87CEEB) drop-shadow(0 0 40px #4169E1);">⚡</div>
+<h3 style="color: #87CEEB; font-size: 36px; margin-bottom: 25px; font-family: 'Impact', sans-serif; text-shadow: 0 0 20px #87CEEB, 0 0 40px #4169E1; animation: textGlow 3s ease-in-out infinite;">
+EXCLUSIVE ACCESS
+</h3>
+<p style="color: #4169E1; font-size: 24px; font-weight: bold; margin-bottom: 30px; text-shadow: 0 0 15px #4169E1; font-family: 'Impact', sans-serif;">
+"I am the God of Speed, and this is my domain."
+</p>
+<div style="background: rgba(0, 0, 0, 0.7); padding: 30px; border-radius: 15px; border: 2px solid #87CEEB; margin: 20px 0; box-shadow: 0 0 25px rgba(135, 206, 235, 0.3);">
+<h4 style="color: #87CEEB; font-size: 28px; margin-bottom: 20px; font-family: 'Impact', sans-serif; text-shadow: 0 0 15px #87CEEB;">
+⚡ SAVITAR'S EXCLUSIVE PRESENTATION ⚡
+</h4>
+<p style="color: #B8D4E8; font-size: 20px; line-height: 1.6; margin-bottom: 25px;">
+Are you ready to experience <strong style="color: #87CEEB;">9 - Family's</strong> play of <strong style="color: #4169E1;">Noli Me Tangere</strong>?
+</p>
+<p style="color: #87CEFA; font-size: 16px; font-style: italic; margin-bottom: 30px;">
+"Only those who dare to venture into the future can witness this exclusive performance."
+</p>
+<button onclick="showNoliVideo()" style="
+background: linear-gradient(45deg, #1E90FF, #4169E1);
+color: #FFFFFF;
+font-family: 'Impact', sans-serif;
+font-size: 22px;
+padding: 20px 40px;
+border: 3px solid #87CEEB;
+border-radius: 15px;
+cursor: pointer;
+box-shadow: 0 0 30px rgba(30, 144, 255, 0.6), 0 0 50px rgba(135, 206, 235, 0.4);
+transition: all 0.3s ease;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+font-weight: bold;
+" onmouseover="this.style.transform='scale(1.05) translateY(-3px)'; this.style.boxShadow='0 0 40px rgba(30, 144, 255, 0.8), 0 0 60px rgba(135, 206, 235, 0.6)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 30px rgba(30, 144, 255, 0.6), 0 0 50px rgba(135, 206, 235, 0.4)';">
+⚡ ENTER SAVITAR'S DOMAIN ⚡
+</button>
+</div>
+</div>
+</div>
+
+<div id="noli-video-section" class="demo-box" style="display: none;">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px; text-align: center;">🎬 9 - Family's Noli Me Tangere Performance</h3>
+<div style="text-align: center; margin: 30px 0;">
+<video controls style="max-width: 800px; width: 100%; border-radius: 10px; border: 2px solid #1E90FF; box-shadow: 0 0 20px rgba(30, 144, 255, 0.3);">
+<source src="https://drive.google.com/uc?export=download&id=1nxGRItsKTluaFatdrabFhyXJjBMpnHP8" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p style="color: #B8D4E8; font-size: 16px; margin-top: 15px; font-style: italic;">
+Dr. Jose P. Rizal's "Noli Me Tangere" - Performed by 9 - Family
+</p>
+<p style="color: #87CEEB; font-size: 14px; margin-top: 10px; font-style: italic;">
+"You have been granted access to witness the future of Filipino literature."
+</p>
+</div>
+</div>
+</div>
+
+<!-- Araling Panlipunan Content -->
+<div id="araling-panlipunan" class="quarter-content">
+<h2 style="color: #87CEEB; font-size: 40px; margin-bottom: 30px; text-align: center;">🌏 Araling Panlipunan</h2>
+
+<!-- AP Lesson Navigation -->
+<div class="lesson-nav">
+<button class="lesson-btn active" onclick="showAPLesson('lesson1')">📈 Lesson 1</button>
+<button class="lesson-btn" onclick="showAPLesson('lesson2')">🌾 Lesson 2</button>
+<button class="lesson-btn" onclick="showAPLesson('lesson3')">🏭 Lesson 3</button>
+<button class="lesson-btn" onclick="showAPLesson('lesson4')">🏢 Lesson 4</button>
+<button class="lesson-btn" onclick="showAPLesson('lesson5')">🛒 Lesson 5</button>
+<button class="lesson-btn" onclick="showAPLesson('lesson6')">🌐 Lesson 6</button>
+</div>
+
+<!-- Lesson 1: Pambansang Kaunlaran -->
+<div id="ap-lesson1" class="lesson-content active">
+<h2 style="color: #87CEEB; font-size: 36px; margin-bottom: 25px;">📈 Lesson 1: Pambansang Kaunlaran</h2>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📋 Kahulugan</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6;">
+Isang estado ng bansa kung saan tinatamasa ng mga tao mula sa pinakamababang uri ng mamamayan ang nakakamanghang pagbabago sa ekonomiya at pamumuhay.
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🔧 Mga Konsepto ng Pambansang Kaunlaran</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🔄 Pagbabago</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">Paraan upang maging iba o naiiba. Proseso ng pag-iiba o pagkakaroon ng kaibahan sa lipunan at ekonomiya.</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">📈 Pag-unlad</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">Pagbabago mula sa mababa tungo sa mataas na antas ng pamumuhay. Pag-angat, pagsulong, o paglago sa pangkalahatang aspeto ng pamumuhay.</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🎯 Pagsulong</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">Pag-usad tungo sa inyong layunin o goal. Pagpapaunlad ng kakayahan, kaalaman, at abilidad upang makasabay sa agos ng buhay.</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🧬 Ebolusyon</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">Pagbabago sa mga katangian sa loob ng mahabang panahon. Anuman ang unang dumating ay mas mabuti sa sinundang panahon.</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📊 Dalawang Konsepto ng Pag-unlad (Todaro & Smith, 2012)</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏛️ Tradisyunal</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">Pagtamo ng patuloy na pagtaas ng income per capita.</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🚀 Makabago</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">Dapat na kumakatawan sa malawakang pagbabago sa buong sistemang panlipunan.</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🏆 Mga Palatandaan ng Pag-unlad</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Makatwiran at dinamikong kaayusan ng panlipunan</li>
+<li>Kasaganaan at kasarinlan</li>
+<li>Kalayaan sa kahirapan, hanapbuhay para sa lahat</li>
+<li>Sapat na mga lingkurang panlipunan</li>
+<li>Katarungang panlipunan</li>
+</ul>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🌍 Human Development Index (HDI)</h3>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.6;">
+Pangkalahatang sukat ng kakayahan ng isang bansa na matugunan ang mahahalagang aspekto ng kaunlarang pantao. Kabilang dito ang kalusugan, edukasyon, at antas ng pamumuhay.
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📊 Antas ng Kaunlaran ng Bansa</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏆 Maunlad na Bansa</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Mga bansang may mataas na GDP, income per capita, at mataas na HDI</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">📈 Umuunlad na Bansa</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Mga bansang may mga industriyang kasalukuyang pinauunlad ngunit wala pang mataas na antas ng industriyalisasyon</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">📉 Papaunlad na Bansa</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Mga bansang kung ihahambing sa iba ay kulang sa industriyalisasyon</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Lesson 2 -->
+<div id="ap-lesson2" class="lesson-content">
+<h2 style="color: #87CEEB; font-size: 36px; margin-bottom: 25px;">🌾 Lesson 2: Sektor ng Agrikultura</h2>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📋 Kahulugan</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6;">
+Isang agham at sining na may kinalaman sa pagpaparami ng mga hayop at mga tanim o halaman. Ito ay may kaugnayan sa lahat ng gawain na sangkot ang mga hayop at halaman. AGER=Lupa; CULTURA=Paglilinang
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🚜 Mga Gawain sa Sektor ng Agrikultura</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🌾</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Pagsasaka</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pangunahing pananim: palay, mais, niyog, tubo, saging, pinya</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🐟</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Pangingisda</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Komersiyal, munisipal, at aquaculture</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🐄</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Paghahayupan</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Mga hayop para sa karne, hibla, gatas, itlog</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🌳</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Paggugubat</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Plywood, tabla, troso, veneer, rattan</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">⭐ Kahalagahan ng Agrikultura</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Pinagmumulan ng pagkain</li>
+<li>Pinagkukunan ng hilaw na materyales</li>
+<li>Nagkakaloob ng trabaho sa maraming Pilipino</li>
+<li>Nagpapasok ng dolyar sa ating bansa</li>
+<li>Pinagkukunan ng sobrang manggagawa</li>
+</ul>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">⚠️ Suliranin ng Agrikultura</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🌾 Pagsasaka</h4>
+<ul style="color: #B8D4E8; margin: 0; font-size: 14px;">
+<li>Pagliit ng lupang sakahan</li>
+<li>Kakulangan ng makabagong teknolohiya</li>
+<li>Climate Change</li>
+</ul>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🐟 Pangingisda</h4>
+<ul style="color: #B8D4E8; margin: 0; font-size: 14px;">
+<li>Mapanirang operasyon ng malalaking komersiyal</li>
+<li>Epekto ng polusyon</li>
+<li>Kahirapan ng mga mangingisda</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🏛️ Mga Sangay ng Pamahalaan</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li><strong>Department of Agriculture (DA):</strong> Gumagabay sa mga magsasaka</li>
+<li><strong>Bureau of Fisheries and Aquatic Resources (BFAR):</strong> Paunlarin ang pangingisda</li>
+<li><strong>Bureau of Animal Industry (BAI):</strong> Nangangasiwa sa paghahayupan</li>
+<li><strong>Ecosystem Research and Development Bureau (ERDB):</strong> Pananaliksik sa ecosystem</li>
+</ul>
+</div>
+</div>
+
+<!-- Lesson 3 -->
+<div id="ap-lesson3" class="lesson-content">
+<h2 style="color: #87CEEB; font-size: 36px; margin-bottom: 25px;">🏭 Lesson 3: Sektor ng Industriya</h2>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📋 Kahulugan</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6;">
+Tumutukoy sa pagproseso ng mga hilaw na materyal at paggawa ng mga produkto na kinakailangan para sa pampublikong pamilihan. Naglalayong maiproseso ang mga hilaw na materyal upang makabuo ng produkto na ginagamit ng tao.
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🏗️ Sub-sektor ng Industriya</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">⛏️</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Pagmimina</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pagkuha at pagproseso ng mga yamang mineral</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🏭</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Pagmamanupaktura</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Paggawa ng mga produkto sa pamamagitan ng manual labor o makina</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🏗️</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Konstruksyon</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pagtatayo ng mga gusali at estruktura</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">⚡</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Utilities</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pagtugon sa mga pangangailangan: tubig, kuryente, gas</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">💼 Kahalagahan sa Pambansang Kaunlaran</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Tumatanggap ng mga produkto mula sa sektor ng agrikultura</li>
+<li>Nagkakaloob ng hanapbuhay sa maraming Pilipino</li>
+<li>Nagpapasok ng dolyar sa bansa</li>
+<li>Nakagagamit ng makabagong teknolohiya</li>
+<li>Gumagawa ng mga intermediate products</li>
+</ul>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🔗 Pagkakaugnay ng Agrikultura at Industriya</h3>
+<p style="color: #B8D4E8; font-size: 16px; line-height: 1.6;">
+Nagmumula sa agrikultura ang mga hilaw na sangkap na ginagamit sa pagbuo ng mga produkto ng industriya. Ang mga ginagamit na traktora, sasakyang pangingisda, at iba pang produkto ay mula sa industriya na ginagamit ng mga magsasaka upang magkaroon ng mataas na produksyon.
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📋 Mga Patakarang Pang-ekonomiya</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🇵🇭 Filipino First Policy</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Nagsimula sa programang Filipino Muna ni Pangulong Carlos P. Garcia</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">⛽ Oil Deregulation Law</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Nagbukas ng kompetisyon sa industriya ng langis</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏗️ Build-Operate-Transfer (BOT)</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Binibigyan ng karapatang bumuo ng mga pasilidad sa sariling pondo</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🏛️ Mga Sangay ng Pamahalaan</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li><strong>Department of Trade and Industry (DTI):</strong> Nangangalaga sa industriya at pangangalakal</li>
+<li><strong>Board of Investments (BOI):</strong> Tumutulong sa mga nagsisimulang industriya</li>
+<li><strong>Philippine Economic Zone Authority (PEZA):</strong> Tumutulong sa mga namumuhunan</li>
+<li><strong>Securities and Exchange Commission (SEC):</strong> Nagtatala ng mga kompanya</li>
+</ul>
+</div>
+</div>
+
+<!-- Lesson 4 -->
+<div id="ap-lesson4" class="lesson-content">
+<h2 style="color: #87CEEB; font-size: 36px; margin-bottom: 25px;">🏢 Lesson 4: Sektor ng Paglilingkod</h2>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📋 Kahulugan</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6;">
+Ang umaalalay sa buong yugto ng produksyon, distribusyon, kalakalan, at pagkonsumo ng mga produkto sa loob o labas ng bansa. Kilala rin ito bilang tersarya o ikatlong sektor ng ekonomiya matapos ang agrikultura at industriya.
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🏛️ Pormal na Sektor sa Ilalim ng Paglilingkod</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🚛 Transportasyon at Komunikasyon</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Mga serbisyong pampublikong sasakyan, telepono, mga imbakan</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🛒 Kalakalan</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pagpapalitan ng iba't-ibang produkto at serbisyo</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏦 Pananalapi</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Serbisyong may kinalaman sa bangko, insurance, pamumuhunan</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏠 Real Estate</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Mga paupahan, subdivision, condominium</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🏛️ Mga Ahensyang Tumutulong</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">DOLE</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Pangangalaga sa kapakanan ng mga manggagawang Pilipino</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">OWWA</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Tumitingin sa kapakanan ng mga OFW</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">POEA</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Paghahanapbuhay sa ibayong-dagat</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">TESDA</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Pagsasanay at pagpapaunlad ng kasanayan</p>
+</div>
+<div style="background: rgba(30, 144, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">PRC</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Nangangasiwa sa mga propesyonal</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">CHED</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Nangangasiwa sa mga pamantasan</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">⚖️ Mga Batas na Nangangalaga sa Manggagawa</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">Holiday Pay</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Bayad na katumbas ng isang araw na sahod sa pista opisyal</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">Overtime Pay</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Karagdagang bayad sa pagtatrabaho lampas sa 8 oras</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">Night Shift Differential</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Karagdagang bayad sa pagtatrabaho sa gabi (10PM-6AM)</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">Thirteenth Month Pay</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Karagdagang sahod bago mag-Disyembre 24</p>
+</div>
+<div style="background: rgba(30, 144, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">Maternity Leave</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Para sa mga nagdadalang-taong manggagawa</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">Paternity Leave</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Para sa mga empleyadong lalaki (4 araw)</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">⭐ Kahalagahan</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Tinitiyak na makakarating sa mga mamimili ang mga produkto</li>
+<li>Nagbibigay ng trabaho sa mga mamamayan</li>
+<li>Tinitiyak ang maayos na pag-iimbak at pagtitinda</li>
+<li>Nagpapataas ng GDP ng bansa</li>
+<li>Nagpapasok ng dolyar sa bansa</li>
+</ul>
+</div>
+</div>
+
+<!-- Lesson 5 -->
+<div id="ap-lesson5" class="lesson-content">
+<h2 style="color: #87CEEB; font-size: 36px; margin-bottom: 25px;">🛒 Lesson 5: Impormal na Sektor</h2>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📋 Kahulugan</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6;">
+Sektor ng ekonomiya na walang pormal o salat sa mga dokumentong kailangan sa pagsasagawa ng gawaing pang-ekonomiya. Ang kita ng sektor na ito ay HINDI naisasama sa kabuuang Gross Domestic Product (GDP) ng bansa. Kilala rin sa tawag na Underground Economy.
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">👥 Mga Halimbawa</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🛒</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Nagtitinda sa Kalsada</h4>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🚲</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Pedicab Driver</h4>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🔨</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Karpintero</h4>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 20px; border-radius: 10px; text-align: center;">
+<div style="font-size: 40px; margin-bottom: 10px;">🚐</div>
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">Hindi Rehistradong Sasakyan</h4>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🔍 Katangian</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Hindi nakarehistro sa pamahalaan</li>
+<li>Hindi nagbabayad ng buwis mula sa kinita</li>
+<li>Walang legal at pormal na balangkas mula sa pamahalaan</li>
+</ul>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📊 Iba't Ibang Anyo</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏠 Gawaing Pang-tahanan</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Mga gawaing maaaring isakatuparan lamang sa loob ng tahanan</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏪 Sari-sari Store</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pagtitinda sa labas ng bahay o sidewalk</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🤝 Gawaing Pansibiko</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pagkakawanggawa at panrelihiyon</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">⚠️ Ilegal na Gawain</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pagnanakaw, pagbebenta ng ilegal na gamot, piracy</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">⭐ Kahalagahan</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Sinasalo ang mga mamamayan na hindi makapasok bilang regular na empleyado</li>
+<li>Nagbibigay ng pagkakataon sa maraming Pilipino na makapaghanapbuhay</li>
+<li>Nagsisilbing tagasalo ng mga mamamayang may mahigpit na pangangailangan</li>
+<li>Mura ang halaga ng mga kalakal at serbisyo</li>
+</ul>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🎯 Mga Programa para sa Mamamayan</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">DILP</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Dole Integrated Livelihood Program - pagsasanay at tulong pangkabuhayan</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">SEA-K</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Self-Employment Assistance Kaunlaran Program</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">4Ps</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Pantawid Pamilyang Pilipino Program - tulong-pinansyal</p>
+</div>
+<div style="background: rgba(135, 206, 235, 0.2); padding: 15px; border-radius: 8px;">
+<h4 style="color: #87CEEB; margin: 0 0 8px 0; font-size: 16px;">CWP</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 13px;">Cash-For-Work Program - pansamantalang kita</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">⚠️ Epekto sa Ekonomiya</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Pagbaba ng halaga ng nalilikom na buwis</li>
+<li>Banta sa kapakanan ng mga mamimili</li>
+<li>Paglaganap ng mga ilegal na gawain</li>
+</ul>
+</div>
+</div>
+
+<!-- Lesson 6 -->
+<div id="ap-lesson6" class="lesson-content">
+<h2 style="color: #87CEEB; font-size: 36px; margin-bottom: 25px;">🌐 Lesson 6: Kalakalang Panlabas</h2>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📋 Kahulugan</h3>
+<p style="color: #B8D4E8; font-size: 18px; line-height: 1.6;">
+Palitan ng produkto at serbisyo sa pagitan ng mga bansa. Ito ay nagaganap sapagkat walang bansa ang maaaring makatugon sa lahat ng kanyang pangangailangan ng walang tulong mula sa ibang bansa.
+</p>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📊 Mga Uri</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">📤 EKSPORT (Pagluluwas)</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">Pagpapadala ng mga produkto at serbisyo sa ibang bansa</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">📥 IMPORT (Pag-aangkat)</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">Pagbili ng kalakal mula sa ibang bansa</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🤝 Dahilan ng Kalakalang Panlabas</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Pagkakaiba ng Teknolohiya</li>
+<li>Pagkakaiba sa Pinagkukunang Yaman</li>
+<li>Pagkakaiba sa Panlasa</li>
+<li>Pagkakaiba sa Halaga ng Produksyon</li>
+</ul>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📋 Patakarang Umaapekto sa Kalakalang Panlabas</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">💰 Taripa/Tariff</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Buwis sa mga produktong inaangkat. Nagpapataas ng presyo at nagpapababa ng benta.</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">📊 Kota (Quota)</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Maaaring limitahan ang pagpasok ng mga kalabang produkto</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🎁 Subsidy</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Tulong na ibinibigay ng gobyerno upang bumaba ang halaga ng produksyon</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">⚖️ Batayan ng Kalakalang Panlabas (David Ricardo)</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏆 Absolute Advantage</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Nakakalikha ng mas maraming bilang ng produkto gamit ang mas kaunting salik ng produksyon</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🎯 Comparative Advantage</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Ang bansa ay magkakaroon ng espesyalisasyon sa paglikha ng kalakal</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">🌏 Mga Samahang Pandaigdigang Pang-ekonomiko</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🏛️ World Trade Organization (WTO)</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Pinasinayaan noong Enero 1, 1995. Namamahala sa pandaigdigang sistema ng kalakalan.</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🌏 APEC</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Asia-Pacific Economic Council. Itinatag noong Nobyembre 1989.</p>
+</div>
+<div style="background: rgba(0, 191, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">🤝 ASEAN</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">Association of Southeast Asian Nations. Itinatag noong August 8, 1967.</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">📈 Balance of Trade (BOT)</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+<div style="background: rgba(30, 144, 255, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">📉 Trade Deficit</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">import > export</p>
+</div>
+<div style="background: rgba(65, 105, 225, 0.2); padding: 20px; border-radius: 10px;">
+<h4 style="color: #87CEEB; margin: 0 0 10px 0;">📈 Trade Surplus</h4>
+<p style="color: #B8D4E8; margin: 0; font-size: 14px;">import < export</p>
+</div>
+</div>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">✅ Kabutihan ng Pakikipagkalakalan</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Mas maraming produkto ang mapagpipilian sa pamilihan</li>
+<li>Napapataas ang kalidad ng mga produkto</li>
+<li>Nagkakaroon ng pagkakaunawaan ang mga bansang nakikipagkalakalan</li>
+<li>Lumalawak ang pamilihan ng mga produkto sa bansa</li>
+</ul>
+</div>
+
+<div class="demo-box">
+<h3 style="color: #4169E1; font-size: 28px; margin-bottom: 20px;">❌ Di-kabutihan ng Pakikipagkalakalan</h3>
+<ul style="color: #B8D4E8; font-size: 16px; line-height: 2; padding-left: 40px;">
+<li>Nagiging palaasa ang mga mamamayan sa produktong imported</li>
+<li>Hindi nalilinang ang pagkamalikhain ng mga mamamayan</li>
+<li>Pagkawala ng sariling pagkakakilanlan bunga ng dayuhang kultura</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+// Global variables
+let eventLogEntries = [];
+
+// Loading and initialization
+window.onload = function() {
+setTimeout(function() {
+document.getElementById('loadingScreen').style.display = 'none';
+document.getElementById('mainContent').style.display = 'block';
+setTimeout(function() {
+document.getElementById('mainContent').classList.add('show');
+}, 50);
+}, 2000);
+};
+
+// Quarter tab switching
+function showQuarter(quarterId) {
+const quarters = document.querySelectorAll('.quarter-content');
+quarters.forEach(quarter => {
+quarter.classList.remove('active');
+});
+
+const tabs = document.querySelectorAll('.quarter-tab');
+tabs.forEach(tab => {
+tab.classList.remove('active');
+});
+
+document.getElementById(quarterId).classList.add('active');
+event.target.classList.add('active');
+}
+
+// ICT Lesson navigation
+function showICTLesson(lessonId) {
+const lessons = document.querySelectorAll('.lesson-content');
+lessons.forEach(lesson => {
+lesson.classList.remove('active');
+});
+
+const buttons = document.querySelectorAll('.lesson-btn');
+buttons.forEach(btn => {
+btn.classList.remove('active');
+});
+
+document.getElementById('ict-' + lessonId).classList.add('active');
+event.target.classList.add('active');
+}
+
+// Lesson 1 Functions
+function showExample(type) {
+const output = document.getElementById('exampleOutput');
+if (type === 'static') {
+output.innerHTML = `
+<h4 style="color: #5B9BD5; margin: 0 0 15px 0;">� Static Web Page Example</h4>
+<div style="background: rgba(0,150,255,0.1); padding: 15px; border-radius: 5px; border: 2px solid #7FB3D5;">
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">
+<strong>Photographer's Portfolio:</strong><br>
+• Fixed content that doesn't change<br>
+• Same for every visitor<br>
+• No user interaction<br>
+• Delivered exactly as stored
+</p>
+</div>
+`;
+} else {
+output.innerHTML = `
+<h4 style="color: #5B9BD5; margin: 0 0 15px 0;">🔄 Dynamic Web Page Example</h4>
+<div style="background: rgba(100,200,255,0.1); padding: 15px; border-radius: 5px; border: 2px solid #7FB3D5;">
+<p style="color: #B8D4E8; margin: 0; font-size: 16px;">
+<strong>Social Media Platforms:</strong><br>
+• Content changes based on user actions<br>
+• Personalized feeds<br>
+• Real-time updates<br>
+• Interactive elements
+</p>
+</div>
+`;
+}
+}
+
+function demonstrateEvents() {
+const result = document.getElementById('demoResult');
+result.innerHTML = '<p style="color: #5B9BD5; font-size: 18px;">✅ Event Triggered! JavaScript can react to mouse clicks, key presses, and page loads.</p>';
+result.style.background = 'rgba(0, 150, 255, 0.2)';
+}
+
+function demonstrateCookies() {
+const result = document.getElementById('demoResult');
+document.cookie = "demo=test; path=/";
+result.innerHTML = '<p style="color: #7FB3D5; font-size: 18px;">� Cookie Created! JavaScript can store and retrieve visitor information.</p>';
+result.style.background = 'rgba(100, 200, 255, 0.2)';
+}
+
+function demonstrateEnhancement() {
+const result = document.getElementById('demoResult');
+result.innerHTML = '<p style="color: #8FAADC; font-size: 18px; animation: pulse 1s infinite;">✨ Enhanced! JavaScript adds dynamic effects and interactivity to webpages.</p>';
+result.style.background = 'rgba(135, 206, 235, 0.2)';
+}
+
+// Lesson 2 Functions
+function demonstrateHeadScript() {
+eventLogEntries.push('🔝 HEAD Script: Executed before page loads (pre-loaded)');
+updateExecutionLog();
+}
+
+function demonstrateBodyScript() {
+eventLogEntries.push('📄 BODY Script: Executed when page loads');
+updateExecutionLog();
+}
+
+function clearExecutionLog() {
+eventLogEntries = [];
+document.getElementById('logContent').innerHTML = 'Log cleared. Ready for new demonstrations...';
+}
+
+function updateExecutionLog() {
+const logContent = document.getElementById('logContent');
+logContent.innerHTML = eventLogEntries.map((entry, index) => 
+`<div style="padding: 5px 0; border-bottom: 1px solid rgba(91, 155, 213, 0.3);">${index + 1}. ${entry}</div>`
+).join('');
+}
+
+function demonstrateCaseSensitive() {
+alert('myHome and MyHome are DIFFERENT variables in JavaScript!\n\nmyHome = "house"\nMyHome = "apartment"\n\nThey store different values.');
+}
+
+function demonstrateWhiteSpace() {
+alert('These are the same:\nvar name = "Grace"\nvar name="Grace"\n\nJavaScript ignores white space!');
+}
+
+function demonstrateLineBreak() {
+alert('Correct: document.write("wow\\Philippines");\n\nWrong: document.\\write("wow Philippines");\n\nUse backslash (\\) to break lines properly!');
+}
+
+// Lesson 3 Functions
+function demonstrateObject() {
+alert('JavaScript Object Example:\n\nvar car = {\n  brand: "Toyota",\n  model: "Camry",\n  year: 2024\n};\n\nAccess: car.brand returns "Toyota"');
+}
+
+function demonstrateMethod() {
+const demo = document.getElementById('methodDemo');
+demo.innerHTML = '<p style="color: #5B9BD5; font-size: 18px;">✅ Method Executed! document.write() is a JavaScript method that writes content to the page.</p>';
+demo.style.background = 'rgba(0, 150, 255, 0.2)';
+}
+
+function demonstrateSyntax() {
+alert('JavaScript Syntax Rules:\n\n1. Statements end with semicolon (;)\n2. Variables declared with var, let, or const\n3. Strings in quotes: "text" or \'text\'\n4. Comments: // single line or /* multi-line */');
+}
+
+// Lesson 4 Functions
+function demonstrateVariable() {
+alert('Variable Declaration:\n\nvar name = "Grace";\nlet age = 16;\nconst school = "MNHS";\n\nVariables store data values!');
+}
+
+function demonstrateEvent() {
+const demo = document.getElementById('eventDemo');
+demo.innerHTML = '<p style="color: #5B9BD5; font-size: 18px;">🎉 Event Triggered! You just triggered an onclick event.</p>';
+demo.style.background = 'rgba(0, 150, 255, 0.2)';
+}
+
+function demonstratePopup(type) {
+if (type === 'alert') {
+alert('This is an Alert Box!');
+} else if (type === 'confirm') {
+const result = confirm('Do you want to continue?');
+alert(result ? 'You clicked OK!' : 'You clicked Cancel!');
+} else if (type === 'prompt') {
+const name = prompt('What is your name?');
+if (name) alert('Hello, ' + name + '!');
+}
+}
+
+function demonstrateArithmetic() {
+const demo = document.getElementById('arithmeticDemo');
+demo.innerHTML = `
+<h4 style="color: #5B9BD5; margin: 0 0 10px 0;">Arithmetic Operations:</h4>
+<p style="color: #B8D4E8; margin: 5px 0;">10 + 5 = ${10 + 5}</p>
+<p style="color: #B8D4E8; margin: 5px 0;">10 - 5 = ${10 - 5}</p>
+<p style="color: #B8D4E8; margin: 5px 0;">10 * 5 = ${10 * 5}</p>
+<p style="color: #B8D4E8; margin: 5px 0;">10 / 5 = ${10 / 5}</p>
+<p style="color: #B8D4E8; margin: 5px 0;">10 % 3 = ${10 % 3} (remainder)</p>
+`;
+}
+
+function demonstrateComparison() {
+const demo = document.getElementById('comparisonDemo');
+demo.innerHTML = `
+<h4 style="color: #5B9BD5; margin: 0 0 10px 0;">Comparison Results:</h4>
+<p style="color: #B8D4E8; margin: 5px 0;">5 == "5" is ${5 == "5"} (equal value)</p>
+<p style="color: #B8D4E8; margin: 5px 0;">5 === "5" is ${5 === "5"} (equal value and type)</p>
+<p style="color: #B8D4E8; margin: 5px 0;">10 > 5 is ${10 > 5}</p>
+<p style="color: #B8D4E8; margin: 5px 0;">10 < 5 is ${10 < 5}</p>
+<p style="color: #B8D4E8; margin: 5px 0;">10 >= 10 is ${10 >= 10}</p>
+`;
+}
+
+function demonstrateConditional() {
+const age = prompt('Enter your age:');
+const demo = document.getElementById('conditionalDemo');
+if (age) {
+if (age >= 18) {
+demo.innerHTML = '<p style="color: #5B9BD5; font-size: 18px;">✅ You are an adult!</p>';
+} else {
+demo.innerHTML = '<p style="color: #7FB3D5; font-size: 18px;">👶 You are a minor!</p>';
+}
+demo.style.background = 'rgba(0, 150, 255, 0.2)';
+}
+}
+
+// Events Functions
+function showEvent(eventName) {
+const events = document.querySelectorAll('.event-content');
+events.forEach(event => {
+event.classList.remove('active');
+});
+
+const buttons = document.querySelectorAll('.event-btn');
+buttons.forEach(btn => {
+btn.classList.remove('active');
+});
+
+document.getElementById('event-' + eventName).classList.add('active');
+event.target.classList.add('active');
+}
+
+// Noli Me Tangere Exclusive Access Function
+function showNoliVideo() {
+const videoSection = document.getElementById('noli-video-section');
+videoSection.style.display = 'block';
+videoSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// AP Lesson navigation
+function showAPLesson(lessonId) {
+const lessons = document.querySelectorAll('#araling-panlipunan .lesson-content');
+lessons.forEach(lesson => {
+lesson.classList.remove('active');
+});
+
+const buttons = document.querySelectorAll('#araling-panlipunan .lesson-btn');
+buttons.forEach(btn => {
+btn.classList.remove('active');
+});
+
+document.getElementById('ap-' + lessonId).classList.add('active');
+event.target.classList.add('active');
+}
+
+// Create Custom Modal
+function createModal(title, message, arcColor, onConfirm, yesText, noText) {
+// Create modal overlay
+const modalOverlay = document.createElement('div');
+modalOverlay.style.cssText = `
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: #001a33;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 10002;
+animation: fadeIn 0.3s;
+`;
+
+// Create modal content
+const modalContent = document.createElement('div');
+modalContent.style.cssText = `
+background: rgba(0, 26, 51, 0.98);
+padding: 50px 60px;
+border-radius: 30px;
+border: 4px solid ${arcColor};
+box-shadow: 0 0 60px ${arcColor}, 0 0 100px ${arcColor}, inset 0 0 30px rgba(30, 144, 255, 0.1);
+text-align: center;
+max-width: 700px;
+animation: scaleIn 0.3s;
+`;
+
+const titleHTML = title ? `<h2 style="color: ${arcColor}; font-family: 'Impact', sans-serif; font-size: 32px; margin-bottom: 20px; text-shadow: 0 0 15px ${arcColor};">
+${title}
+</h2>` : '';
+
+modalContent.innerHTML = `
+${titleHTML}
+<p style="color: ${arcColor}; font-family: 'Impact', sans-serif; font-size: 42px; margin-bottom: 40px; line-height: 1.4; text-shadow: 0 0 20px ${arcColor}, 0 0 40px ${arcColor};">
+${message}
+</p>
+<div style="display: flex; gap: 30px; justify-content: center;">
+<button id="modalYes" style="
+background: #00BFFF;
+color: #fff;
+font-family: 'Impact', sans-serif;
+font-size: 20px;
+padding: 20px 40px;
+border: 3px solid #00FFFF;
+border-radius: 15px;
+cursor: pointer;
+box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+transition: all 0.3s ease;
+font-weight: bold;
+min-width: 280px;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+">
+${yesText || '✓ YES'}
+</button>
+<button id="modalNo" style="
+background: #FF6B6B;
+color: #fff;
+font-family: 'Impact', sans-serif;
+font-size: 20px;
+padding: 20px 40px;
+border: 3px solid #FF4444;
+border-radius: 15px;
+cursor: pointer;
+box-shadow: 0 0 30px rgba(255, 68, 68, 0.6);
+transition: all 0.3s ease;
+font-weight: bold;
+min-width: 280px;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+">
+${noText || '✗ NO'}
+</button>
+</div>
+`;
+
+modalOverlay.appendChild(modalContent);
+document.body.appendChild(modalOverlay);
+
+// Add hover effects
+const yesBtn = modalContent.querySelector('#modalYes');
+const noBtn = modalContent.querySelector('#modalNo');
+
+yesBtn.onmouseover = () => {
+yesBtn.style.transform = 'scale(1.05) translateY(-2px)';
+yesBtn.style.boxShadow = '0 0 40px rgba(0, 255, 255, 0.9)';
+};
+yesBtn.onmouseout = () => {
+yesBtn.style.transform = 'scale(1)';
+yesBtn.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.6)';
+};
+
+noBtn.onmouseover = () => {
+noBtn.style.transform = 'scale(1.05) translateY(-2px)';
+noBtn.style.boxShadow = '0 0 40px rgba(255, 68, 68, 0.9)';
+};
+noBtn.onmouseout = () => {
+noBtn.style.transform = 'scale(1)';
+noBtn.style.boxShadow = '0 0 30px rgba(255, 68, 68, 0.6)';
+};
+
+// Button actions
+yesBtn.onclick = () => {
+document.body.removeChild(modalOverlay);
+onConfirm();
+};
+
+noBtn.onclick = () => {
+document.body.removeChild(modalOverlay);
+};
+}
+
+// Arc Navigation with Loading Screen
+function navigateToArc1() {
+createModal(
+'',
+'Do you want to return to the past?',
+'#FF4444',
+function() {
+// Create loading screen
+const loadingDiv = document.createElement('div');
+loadingDiv.id = 'transitionScreen';
+loadingDiv.style.cssText = `
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: #2e1a1a;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+z-index: 10001;
+`;
+loadingDiv.innerHTML = `
+<div style="position: relative; z-index: 1; text-align: center;">
+<div style="font-size: 80px; margin-bottom: 20px; animation: pulse 1.5s infinite; filter: drop-shadow(0 0 20px #FF4444) drop-shadow(0 0 40px #FF6B6B);">⚡</div>
+<div style="font-size: 36px; font-family: 'Impact', sans-serif; color: #FF4444; text-shadow: 0 0 20px #FF6B6B, 0 0 40px #FF4444; margin-bottom: 20px; animation: textGlow 2s infinite;">
+TRAVELING BACK TO THE PAST...
+</div>
+<div style="font-size: 18px; color: #FF6B6B; text-shadow: 0 0 10px #FF4444; font-style: italic; margin-bottom: 30px;">
+"I am the fastest man alive."
+</div>
+</div>
+`;
+document.body.appendChild(loadingDiv);
+
+// Navigate after delay
+setTimeout(function() {
+window.location.href = 'index.html';
+}, 1500);
+},
+'Yes, I would like to return to the past',
+'No, I would like to stay in the future'
+);
+return false;
+}
+
+function navigateToArc2() {
+createModal(
+'',
+'Do you want to return to the present?',
+'#FFFF00',
+function() {
+// Create loading screen
+const loadingDiv = document.createElement('div');
+loadingDiv.id = 'transitionScreen';
+loadingDiv.style.cssText = `
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: #1a3333;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+z-index: 10001;
+`;
+loadingDiv.innerHTML = `
+<div style="font-size: 80px; margin-bottom: 20px; animation: pulse 1.5s infinite; filter: drop-shadow(0 0 20px #FFFF00) drop-shadow(0 0 40px #00FFFF);">⚡</div>
+<div style="font-size: 36px; font-family: 'Impact', sans-serif; color: #FFFF00; text-shadow: 0 0 20px #00FFFF, 0 0 40px #FFFF00; margin-bottom: 20px; animation: textGlow 2s infinite;">
+TRAVELING BACK TO THE PRESENT...
+</div>
+<div style="font-size: 18px; color: #00FFFF; text-shadow: 0 0 10px #FFFF00; font-style: italic;">
+"You can't lock up the darkness."
+</div>
+`;
+document.body.appendChild(loadingDiv);
+
+// Navigate after delay
+setTimeout(function() {
+window.location.href = 'arc2.html';
+}, 1500);
+},
+'Yes, I want to return to the present',
+'No, I want to stay in the future'
+);
+return false;
+}
+</script>
+
+</body>
+</html>
